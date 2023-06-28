@@ -13,6 +13,8 @@ class MainWindow(QMainWindow):
 
         # Create menu bar
         menu_bar = self.menuBar()
+        # under this function is for macOS
+        menu_bar.setNativeMenuBar(False)
         file_menu = menu_bar.addMenu('File')
 
         # Create submenus
