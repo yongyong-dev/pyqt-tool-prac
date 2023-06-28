@@ -14,7 +14,7 @@ class MainWindow(QMainWindow):
         # Create menu bar
         menu_bar = self.menuBar()
         # under this function is for macOS
-        menu_bar.setNativeMenuBar(False)
+        # menu_bar.setNativeMenuBar(False)
         file_menu = menu_bar.addMenu('File')
 
         # Create submenus
@@ -54,11 +54,21 @@ class MainWindow(QMainWindow):
         table_view.setMinimumWidth(int(0.75 * event.size().width()))
 
     def open_file(self):
-        home_dir = QFileDialog.getExistingDirectory(self, 'Select Home Directory')
-        binary_file_path = QFileDialog.getOpenFileName(self, 'Select Binary File')[0]
+        print('open')
+        # Create working directory dialog
+        working_dir_dialog = QFileDialog(self, 'Select Working Directory')
+        # Create binary file dialog
+        binary_file_dialog = QFileDialog(self, 'Select Binary File')
+        # Add text input fields to dialogs
+        working_dir_dialog.setFileMode(QFileDialog.DirectoryOnly)
+        binary_file_dialog.setFileMode(QFileDialog.ExistingFile)
+        # Add buttons to dialogs
+        working_dir_dialog.setOptions(QFileDialog.ShowDirsOnly | QFileDialog.DontResolveSymlinks | QFileDialog.ReadOnly)
+        binary_file_dialog.setOptions(QFileDialog.DontResolveSymlinks | QFileDialog.ReadOnly)
 
     def exit_app(self):
         QApplication.quit()
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
